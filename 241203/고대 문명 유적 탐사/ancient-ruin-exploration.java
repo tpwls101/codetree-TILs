@@ -16,7 +16,7 @@ import java.util.*;
 
 public class Main {
 	
-	static int K; // 탐사 반복 횟수
+    static int K; // 탐사 반복 횟수
     static int M; // 벽면에 적힌 유물 조각의 개수
     static int[][] arr = new int[5][5]; // 유물 배열
     static int[][] copy; // 한번 회전시킨 후를 저장하는 배열
