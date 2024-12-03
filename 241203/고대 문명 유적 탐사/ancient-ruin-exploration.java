@@ -1,6 +1,19 @@
 import java.io.*;
 import java.util.*;
 
+/**
+1. 최적의 중심 좌표와 회전 횟수(각도) 구하기
+	- 가능한 모든 경우를 후보 list에 저장
+	- 조건에 맞게 정렬
+	- 0번째가 최적
+2. 최적의 중심 좌표에서 회전 횟수만큼 회전시키기
+3. 유물 구하기 (가능할 때까지 반복)
+	- BFS 탐색 (크기가 3 이상인 것만 획득 가능)
+	- 제거하기 위해 remove 우선순위 큐에 담기
+	- 우선순위에 따라 제거하면서 벽에 붙어 있는 유물 조각(큐 사용) poll()해서 사용
+4. 한 턴에 가능한 최대 유물 가치 출력
+*/
+
 public class Main {
 	
 	static int K; // 탐사 반복 횟수
@@ -95,20 +108,8 @@ public class Main {
 					}
 					
 					for(int k=1; k<=3; k++) { // 각도 : 90 180 270
-						rotate(i-1, j-1); // 90도 회전
-						
-//						System.out.println("(" + i + "," + j + ") 기준 " + k*90 + "도 회전 후");
-//						for(int a=0; a<5; a++) {
-//							for(int b=0; b<5; b++) {
-//								System.out.print(copy[a][b] + " ");
-//							}
-//							System.out.println();
-//						}
-						
+						rotate(i-1, j-1); // 90도 회전						
 						int score = bfs(copy); // 회전시킨 후 bfs를 통해 1차 유물 가치 구하기
-//						System.out.println("유물 가치 : " + score);
-//						System.out.println();
-						
 						if(score > 0) { // 유물을 획득하는 경우에만 후보 리스트에 추가
 							candidate.add(new Node(i, j, score, k));
 						}
@@ -123,10 +124,6 @@ public class Main {
 			Collections.sort(candidate);
 			Node best = candidate.get(0);
 			
-//			System.out.print("최적 중심 좌표 확인 : ");
-//			System.out.println("x = " + best.x + ", y = " + best.y);
-//			System.out.println("최적 회전 횟수 = " + best.rotateCnt);
-			
 			// rotate 함수가 copy 배열을 회전시키므로 copy 배열에 원본 배열을 다시 저장해 준다
 			for(int i=0; i<5; i++) {
 				copy[i] = arr[i].clone();
@@ -136,14 +133,6 @@ public class Main {
 			for(int i=0; i<best.rotateCnt; i++) {
 				rotate(best.x - 1, best.y - 1);
 			}
-			
-//			System.out.println("최적 회전 후 확인");
-//			for(int i=0; i<5; i++) {
-//				for(int j=0; j<5; j++) {
-//					System.out.print(copy[i][j] + " ");
-//				}
-//				System.out.println();
-//			}
 			
 			// copy 배열을 arr 배열에 복사
 			// 원래 배열에서 회전시킨 후 유물을 제거하고 새로 채워넣은 후 다음 탐사를 진행해야하기 때문
