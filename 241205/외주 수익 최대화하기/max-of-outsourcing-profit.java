@@ -29,7 +29,7 @@ public class Main {
 
     // start : 시작날짜, sum : 수익의 합
     static void dfs(int start, int sum) {
-        if(start >= N) {
+        if(start > N) {
             return;
         }
 
