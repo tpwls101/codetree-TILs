@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.*;
 
+/**
+- 백준 퇴사와 같은 유형의 문제
+- 수익의 최댓값을 언제 갱신시켜주느냐를 잘 생각해야 함. if문에서 갱신시키면 기한이 맞지않아도 갱신되므로 주의!
+- dfs 재귀호출할 때 start+arr[i][1]이 아니라, 현재 날짜인 i를 사용해야 함. i+arr[i][1]
+*/
+
 public class Main {
     
     static int N; // 휴가 날짜
