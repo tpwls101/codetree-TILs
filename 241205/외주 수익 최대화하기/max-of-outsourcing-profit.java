@@ -27,14 +27,15 @@ public class Main {
         System.out.println(answer);
     }
 
+    // start : 시작날짜, sum : 수익의 합
     static void dfs(int start, int sum) {
         if(start >= N) {
-            answer = Math.max(answer, sum);
             return;
         }
 
         for(int i=start; i<N; i++) {
             dfs(i + arr[i][1], sum + arr[i][2]);
         }
+        answer = Math.max(answer, sum); // 위치가 중요. if문 안에 있으면 안되는 경우도 answer로 갱신된다.
     }
 }
