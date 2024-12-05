@@ -6,6 +6,8 @@ import java.util.*;
 2. 고른 M개의 병원에 대해 각 사람마다 병원 거리 구하기
     - M개의 병원에 대해 모두 거리를 구해보고 가장 작은 값이 병원 거리다.
 3. 병원 거리의 합을 구해 모든 경우의 수마다 최소로 갱신
+
+병원의 위치와 사람의 위치를 리스트에 저장하고 꺼내쓰면 편하다!
 */
 
 public class Main {
@@ -81,6 +83,7 @@ public class Main {
 
     static int getTotalHospitalDistance() {
         int sum = 0; // 병원 거리의 총 합
+        
         for(int i=0; i<person.size(); i++) {
             int hospitalDistance = Integer.MAX_VALUE; // 한 사람의 병원 거리
 
