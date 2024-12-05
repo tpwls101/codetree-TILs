@@ -1,6 +1,11 @@
 import java.io.*;
 import java.util.*;
 
+/**
+- 백준에 학급과 학생, 시험감독 나오는 문제랑 완전 같은 유형
+- 입력값 범위 상 while문 쓰면 안되고, long 타입 써야 하는 것만 주의하면 쉬운 문제!
+*/
+
 public class Main {
     
     static int N; // 식당의 수
