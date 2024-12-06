@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.*;
 
+/**
+주의사항 : 매번 bfs를 돌릴 때마다 visited 배열을 초기화해줘야 한다.
+*/
+
 public class Main {
 
     static int N; // 격자의 크기
@@ -59,21 +63,30 @@ public class Main {
                 }
             }
 
-            for(int i=0; i<N; i++) {
-                arr[i] = copy[i].clone();
-            }
+            // System.out.println("copy 배열 확인");
+            // for(int i=0; i<N; i++) {
+            //     for(int j=0; j<N; j++) {
+            //         System.out.print(copy[i][j] + " ");
+            //     }
+            //     System.out.println();
+            // }
 
             if(flag) answer++;
             else break;
+
+            for(int i=0; i<N; i++) {
+                arr[i] = copy[i].clone();
+            }
         }
 
         System.out.println(answer);
     }
 
     static void bfs(Node node) {
+        Queue<Node> queue = new ArrayDeque<>();
+        visited = new boolean[N][N];
         List<Node> list = new ArrayList<>(); // 값이 변할 곳의 위치를 저장
 
-        Queue<Node> queue = new ArrayDeque<>();
         queue.add(node);
         visited[node.x][node.y] = true;
         list.add(node);
@@ -93,9 +106,9 @@ public class Main {
                     if(!visited[nx][ny] && diff >= L && diff <= R) {
                         queue.add(new Node(nx, ny));
                         visited[nx][ny] = true;
+                        list.add(new Node(nx, ny));
                         cnt++;
                         sum += arr[nx][ny];
-                        list.add(new Node(nx, ny));
                     }
                 }
             }
