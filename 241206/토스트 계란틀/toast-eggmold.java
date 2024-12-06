@@ -63,14 +63,6 @@ public class Main {
                 }
             }
 
-            // System.out.println("copy 배열 확인");
-            // for(int i=0; i<N; i++) {
-            //     for(int j=0; j<N; j++) {
-            //         System.out.print(copy[i][j] + " ");
-            //     }
-            //     System.out.println();
-            // }
-
             if(flag) answer++;
             else break;
 
