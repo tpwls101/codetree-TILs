@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 /**
-주의사항 : 매번 bfs를 돌릴 때마다 visited 배열을 초기화해줘야 한다.
+주의사항 : 인구이동을 확인할 때마다 visited 배열을 초기화해줘야 한다.
 */
 
 public class Main {
@@ -39,7 +39,6 @@ public class Main {
         
         arr = new int[N][N];
         copy = new int[N][N];
-        visited = new boolean[N][N];
 
         for(int i=0; i<N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -55,6 +54,7 @@ public class Main {
         while(flag) {
             flag = false;
 
+            visited = new boolean[N][N]; // 한번 인구이동이 일어난 후 초기화
             for(int i=0; i<N; i++) {
                 for(int j=0; j<N; j++) {
                     if(!visited[i][j]) {
@@ -84,7 +84,6 @@ public class Main {
 
     static void bfs(Node node) {
         Queue<Node> queue = new ArrayDeque<>();
-        visited = new boolean[N][N];
         List<Node> list = new ArrayList<>(); // 값이 변할 곳의 위치를 저장
 
         queue.add(node);
