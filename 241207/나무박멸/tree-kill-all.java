@@ -71,12 +71,13 @@ public class Main {
 
             // 2. 번식(동시에)
             spread();
-            // for(int i=0; i<N; i++) {
+            // for(int a=0; a<N; a++) {
             //     for(int j=0; j<N; j++) {
-            //         System.out.print(arr[i][j] + " ");
+            //         System.out.print(arr[a][j] + " ");
             //     }
             //     System.out.println();
             // }
+            // System.out.println();
 
             // 3. 제초제 뿌리기
             removeTree();
@@ -179,7 +180,10 @@ public class Main {
         int removedCnt = check(best.x, best.y); // 박멸할 나무 위치 리스트(position) 얻을 수 있음
         // System.out.println("박멸할 나무 개수 : " + removedCnt);
         for(Node node : position) {
-            arr[node.x][node.y] = 0; // 나무 박멸
+            // 나무가 있는 곳만 박멸시키고, 벽이나 없는 곳은 그대로 유지
+            if(arr[node.x][node.y] > 0) {
+                arr[node.x][node.y] = 0;
+            }
             remove[node.x][node.y] = C; // 박멸한 위치에 제초제가 남아있을 년 수 저장
         }
         answer += removedCnt;
@@ -195,7 +199,7 @@ public class Main {
         for(int i=1; i<=K; i++) {
             if(isRange(x-i, y+i)) { // 우상
                 if(arr[x-i][y+i] <= 0) {
-                    remove[x-i][y+i] = C;
+                    position.add(new Node(x-i, y+i, 0));
                     break;
                 }
                 // System.out.println("== " + arr[x-i][y+i]);
@@ -206,7 +210,7 @@ public class Main {
         for(int i=1; i<=K; i++) {
             if(isRange(x+i, y+i)) { // 우하
                 if(arr[x+i][y+i] <= 0) {
-                    remove[x+i][y+i] = C;
+                    position.add(new Node(x+i, y+i, 0));
                     break;
                 }
                 // System.out.println("== " + arr[x+i][y+i]);
@@ -217,7 +221,7 @@ public class Main {
         for(int i=1; i<=K; i++) {
             if(isRange(x+i, y-i)) { // 좌하
                 if(arr[x+i][y-i] <= 0) {
-                    remove[x+i][y-i] = C;
+                    position.add(new Node(x+i, y-i, 0));
                     break;
                 }
                 // System.out.println("== " + arr[x+i][y-i]);
@@ -228,7 +232,7 @@ public class Main {
         for(int i=1; i<=K; i++) {
             if(isRange(x-i, y-i)) { // 좌상
                 if(arr[x-i][y-i] <= 0) {
-                    remove[x-i][y-i] = C;
+                    position.add(new Node(x-i, y-i, 0));
                     break;
                 }
                 // System.out.println("== " + arr[x-i][y-i]);
