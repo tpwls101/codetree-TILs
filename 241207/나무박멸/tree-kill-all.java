@@ -193,7 +193,10 @@ public class Main {
         // 제초제를 뿌리다가 벽이 있거나 나무가 없는 칸을 만나면 전파 stop
         for(int i=1; i<=K; i++) {
             if(isRange(x-i, y+i)) { // 우상
-                if(arr[x-i][y+i] <= 0) break;
+                if(arr[x-i][y+i] <= 0) {
+                    remove[x-i][y+i] = C;
+                    break;
+                }
                 // System.out.println("== " + arr[x-i][y+i]);
                 sum += arr[x-i][y+i];
                 position.add(new Node(x-i, y+i, 0));
@@ -201,7 +204,10 @@ public class Main {
         }
         for(int i=1; i<=K; i++) {
             if(isRange(x+i, y+i)) { // 우하
-                if(arr[x+i][y+i] <= 0) break;
+                if(arr[x+i][y+i] <= 0) {
+                    remove[x+i][y+i] = C;
+                    break;
+                }
                 // System.out.println("== " + arr[x+i][y+i]);
                 sum += arr[x+i][y+i];
                 position.add(new Node(x+i, y+i, 0));
@@ -209,7 +215,10 @@ public class Main {
         }
         for(int i=1; i<=K; i++) {
             if(isRange(x+i, y-i)) { // 좌하
-                if(arr[x+i][y-i] <= 0) break;
+                if(arr[x+i][y-i] <= 0) {
+                    remove[x+i][y-i] = C;
+                    break;
+                }
                 // System.out.println("== " + arr[x+i][y-i]);
                 sum += arr[x+i][y-i];
                 position.add(new Node(x+i, y-i, 0));
@@ -217,7 +226,10 @@ public class Main {
         }
         for(int i=1; i<=K; i++) {
             if(isRange(x-i, y-i)) { // 좌상
-                if(arr[x-i][y-i] <= 0) break;
+                if(arr[x-i][y-i] <= 0) {
+                    remove[x-i][y-i] = C;
+                    break;
+                }
                 // System.out.println("== " + arr[x-i][y-i]);
                 sum += arr[x-i][y-i];
                 position.add(new Node(x-i, y-i, 0));
