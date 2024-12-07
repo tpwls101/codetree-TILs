@@ -161,6 +161,7 @@ public class Main {
         // System.out.println("==========");
 
         Collections.sort(candidate);
+        if(candidate.size() < 1) return;
         Node best = candidate.get(0); // 제초제 뿌릴 위치 선정 완료
 
         // System.out.println("제초제 뿌릴 위치");
