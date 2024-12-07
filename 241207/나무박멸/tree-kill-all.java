@@ -179,7 +179,7 @@ public class Main {
         // System.out.println("박멸할 나무 개수 : " + removedCnt);
         for(Node node : position) {
             arr[node.x][node.y] = 0; // 나무 박멸
-            remove[node.x][node.y] += C; // 박멸한 위치에 제초제가 남아있을 년 수 저장
+            remove[node.x][node.y] = C; // 박멸한 위치에 제초제가 남아있을 년 수 저장
         }
         answer += removedCnt;
     }
