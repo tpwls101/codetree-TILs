@@ -2,7 +2,16 @@ import java.io.*;
 import java.util.*;
 
 /**
-빈 칸(0), 벽(-1)
+<주의사항1>
+런타임 에러!
+더 이상 제초할 나무가 없는 경우를 생각해줘야 한다.
+candidate.size()가 0인 경우 처리해주기!
+
+<주의사항2>
+문제를 제대로 구현하지 못함
+제초할 때 나무가 없는 곳이나 벽을 만나도 제초제를 뿌려줘야 한다.
+이를 check() 함수에서 처리하면 제초제 뿌릴 위치를 확인할 때 뿌려지는 곳이 생기니
+position 리스트에 담아서 한꺼번에 처리할 것!!
 */
 
 public class Main {
@@ -71,23 +80,9 @@ public class Main {
 
             // 2. 번식(동시에)
             spread();
-            // for(int a=0; a<N; a++) {
-            //     for(int j=0; j<N; j++) {
-            //         System.out.print(arr[a][j] + " ");
-            //     }
-            //     System.out.println();
-            // }
-            // System.out.println();
-
+            
             // 3. 제초제 뿌리기
             removeTree();
-            // for(int a=0; a<N; a++) {
-            //     for(int j=0; j<N; j++) {
-            //         System.out.print(arr[a][j] + " ");
-            //     }
-            //     System.out.println();
-            // }
-            // System.out.println();
         }
 
         System.out.println(answer);
@@ -154,19 +149,14 @@ public class Main {
             for(int j=0; j<N; j++) {
                 if(arr[i][j] > 0) { // 나무가 있는 곳만 확인
                     int removedCnt = check(i, j); // 각 칸에서 박멸할 나무의 수
-                    // System.out.println(removedCnt);
                     candidate.add(new Node(i, j, removedCnt));
                 }
             }
         }
-        // System.out.println("==========");
 
         Collections.sort(candidate);
-        if(candidate.size() < 1) return;
+        if(candidate.size() < 1) return; // 더 이상 제초할 나무가 없는 경우 처리 필수!!
         Node best = candidate.get(0); // 제초제 뿌릴 위치 선정 완료
-
-        // System.out.println("제초제 뿌릴 위치");
-        // System.out.println(best.x + " " + best.y);
 
         // 제초제 뿌리기 전에 1년 지났으니 제초제의 남은 년 수 갱신
         for(int i=0; i<N; i++) {
@@ -178,7 +168,6 @@ public class Main {
         }
 
         int removedCnt = check(best.x, best.y); // 박멸할 나무 위치 리스트(position) 얻을 수 있음
-        // System.out.println("박멸할 나무 개수 : " + removedCnt);
         for(Node node : position) {
             // 나무가 있는 곳만 박멸시키고, 벽이나 없는 곳은 그대로 유지
             if(arr[node.x][node.y] > 0) {
@@ -198,46 +187,30 @@ public class Main {
         // 제초제를 뿌리다가 벽이 있거나 나무가 없는 칸을 만나면 전파 stop
         for(int i=1; i<=K; i++) {
             if(isRange(x-i, y+i)) { // 우상
-                if(arr[x-i][y+i] <= 0) {
-                    position.add(new Node(x-i, y+i, 0));
-                    break;
-                }
-                // System.out.println("== " + arr[x-i][y+i]);
-                sum += arr[x-i][y+i];
                 position.add(new Node(x-i, y+i, 0));
+                if(arr[x-i][y+i] <= 0) break;
+                sum += arr[x-i][y+i];
             }
         }
         for(int i=1; i<=K; i++) {
             if(isRange(x+i, y+i)) { // 우하
-                if(arr[x+i][y+i] <= 0) {
-                    position.add(new Node(x+i, y+i, 0));
-                    break;
-                }
-                // System.out.println("== " + arr[x+i][y+i]);
-                sum += arr[x+i][y+i];
                 position.add(new Node(x+i, y+i, 0));
+                if(arr[x+i][y+i] <= 0) break;
+                sum += arr[x+i][y+i];
             }
         }
         for(int i=1; i<=K; i++) {
             if(isRange(x+i, y-i)) { // 좌하
-                if(arr[x+i][y-i] <= 0) {
-                    position.add(new Node(x+i, y-i, 0));
-                    break;
-                }
-                // System.out.println("== " + arr[x+i][y-i]);
-                sum += arr[x+i][y-i];
                 position.add(new Node(x+i, y-i, 0));
+                if(arr[x+i][y-i] <= 0) break;
+                sum += arr[x+i][y-i];
             }
         }
         for(int i=1; i<=K; i++) {
             if(isRange(x-i, y-i)) { // 좌상
-                if(arr[x-i][y-i] <= 0) {
-                    position.add(new Node(x-i, y-i, 0));
-                    break;
-                }
-                // System.out.println("== " + arr[x-i][y-i]);
-                sum += arr[x-i][y-i];
                 position.add(new Node(x-i, y-i, 0));
+                if(arr[x-i][y-i] <= 0) break;
+                sum += arr[x-i][y-i];
             }
         }
         sum += arr[x][y]; // (x,y) 값 더해주기
